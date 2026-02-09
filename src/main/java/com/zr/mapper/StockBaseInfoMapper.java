@@ -13,5 +13,5 @@ public interface StockBaseInfoMapper {
 
     List<StockBaseInfo> selectAll();
 
-    List<StockBaseInfo> selectAllById(@Param("id") Integer id);
+    List<StockBaseInfo> selectAllById(@Param("code") String code);
 }

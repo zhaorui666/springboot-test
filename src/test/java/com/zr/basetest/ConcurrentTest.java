@@ -1,6 +1,8 @@
 package com.zr.basetest;
 
 import com.alibaba.ttl.TransmittableThreadLocal;
+import com.zr.Foo;
+import com.zr.Target;
 import org.junit.Test;
 import org.springframework.aop.framework.ProxyFactory;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -149,6 +151,16 @@ public class ConcurrentTest {
 
         Enhancer enhancer = new Enhancer();
 
-
     }
+
+
+
+    @Test
+    public void staticErrorTest() {
+        Integer staticField = Foo.staticField;
+
+        System.out.println("================");
+    }
+
+
 }

@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zr.mapper.StockBaseInfoMapper">
+  <!-- mybatis 开启二级缓存 -->
+  <cache type="org.apache.ibatis.cache.impl.PerpetualCache" size="1024" eviction="LRU" flushInterval="120000" readOnly="false"/>
+
   <resultMap id="BaseResultMap" type="com.zr.pojo.StockBaseInfo">
     <result column="code" jdbcType="VARCHAR" property="code" />
     <result column="name" jdbcType="VARCHAR" property="name" />
@@ -20,6 +23,6 @@
 
   <select id="selectAllById" resultMap="BaseResultMap">
     select code, `name`, marketValue, pe
-    from stock_base_info where id = #{id}
+    from stock_base_info where code = #{code}
   </select>
 </mapper>

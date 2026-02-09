@@ -19,6 +19,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import java.io.IOException;
@@ -688,8 +689,10 @@ public class MarketService {
 
     }
 
-    public List<StockBaseInfo> selectTest(Integer code) {
+    @Transactional
+    public List<StockBaseInfo> selectTest(String code) {
         List<StockBaseInfo> stockBaseInfos = stockBaseInfoMapper.selectAllById(code);
+        List<StockBaseInfo> s = stockBaseInfoMapper.selectAllById(code);
         return stockBaseInfos;
     }
 }
