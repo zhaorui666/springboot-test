@@ -5,6 +5,7 @@ import com.zr.annotation.CurrentLimiter;
 import com.zr.constant.LimitType;
 import com.zr.pojo.StockBaseInfo;
 import com.zr.service.MarketService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +16,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
+@Slf4j
 @RestController
 public class MarketController {
 
@@ -73,6 +75,6 @@ public class MarketController {
 
     @RequestMapping("/voidTest")
     public void voidTest() throws IOException {
-
+        log.info("password is [{}]", "13812345678");
     }
 }
