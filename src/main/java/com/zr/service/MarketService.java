@@ -18,6 +18,9 @@ import org.apache.http.util.EntityUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
+import org.springframework.context.annotation.Scope;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
@@ -36,7 +39,11 @@ import java.util.concurrent.*;
 import java.util.stream.Collectors;
 
 @Service
+@Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 public class MarketService {
+
+    @Autowired
+    private FactoryBeanActually factoryBeanActually;
 
     @Autowired
     private StockBaseInfoMapper stockBaseInfoMapper;
@@ -689,10 +696,16 @@ public class MarketService {
 
     }
 
+    public List<StockBaseInfo> shardingTest(Integer id) {
+        List<StockBaseInfo> stockBaseInfos = stockBaseInfoMapper.selectAllById(id);
+        return stockBaseInfos;
+    }
+
     @Transactional
+    @Async
     public List<StockBaseInfo> selectTest(String code) {
-        List<StockBaseInfo> stockBaseInfos = stockBaseInfoMapper.selectAllById(code);
-        List<StockBaseInfo> s = stockBaseInfoMapper.selectAllById(code);
+        List<StockBaseInfo> stockBaseInfos = stockBaseInfoMapper.selectAllByCode(code);
+        List<StockBaseInfo> s = stockBaseInfoMapper.selectAllByCode(code);
         return stockBaseInfos;
     }
 }
